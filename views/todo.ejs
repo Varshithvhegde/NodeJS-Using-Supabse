@@ -1,0 +1,54 @@
+
+<body>
+    <h1>TO-DO App</h1>
+    <form action="/add" method="POST">
+        <input type="text" name="todo" placeholder="Enter your to-do">
+        <button type="submit">Add</button>
+    </form>
+
+    <ul>
+        <% for(let i=0; i<data.length; i++) { %>
+            <li><%= data[i].task_name %></li>
+        <% } %>
+        </ul>
+        <button id="delete" onclick="del()">Delete</button>
+</body>
+<script>
+function del() {
+    // console.log("delete");
+    // var xhttp = new XMLHttpRequest();
+    // // send id of the task to be deleted
+
+
+    // xhttp.onreadystatechange = function() {
+    //     if (this.readyState == 4 && this.status == 200) {
+    //         console.log(this.responseText);
+    //     }
+    // };
+    // // send id of the task to be deleted
+    // xhttp.open("POST", "/delete", true);
+    // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // xhttp.send("id=4");
+
+    const response =  fetch("/delete", {
+method: 'POST',
+headers: {
+  'Accept': 'application/json',
+  'Content-Type': 'application/json'
+},
+body: `{
+   "id": 1,
+   
+  }`,
+});
+response.then(res => {
+  console.log(res);
+});
+// response.json().then(data => {
+//   console.log(data);
+// });
+
+
+
+}
+</script>
