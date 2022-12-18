@@ -38,7 +38,7 @@ app.post('/add', (req, res) => {
         { task_name : task_name,done : false }
     ]).then((data) => {
         // redirect to todo page
-        res.redirect('/todo');
+        res.redirect('/');
     }
     )
 
