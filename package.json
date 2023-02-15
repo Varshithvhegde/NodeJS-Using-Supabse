@@ -1,7 +1,6 @@
 {
   "name": "supabase",
   "version": "1.0.0",
-  "description": "",
   "main": "todo.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,5 +14,14 @@
     "ejs": "^3.1.2",
     "express": "^4.18.2",
     "jsdom": "^20.0.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Varshithvhegde/NodeJS-Using-Supabse.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Varshithvhegde/NodeJS-Using-Supabse/issues"
+  },
+  "homepage": "https://github.com/Varshithvhegde/NodeJS-Using-Supabse#readme",
+  "description": ""
 }

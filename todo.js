@@ -13,15 +13,38 @@ async function getTodos() {
     let { data, error } = await supabase.from('todo').select('*')
     return data
 }
+
+async function deleteTask(id) {
+    try {
+      const { data, error } = await supabase
+        .from('todo')
+        .delete()
+        .eq('id', id);
+        
+      if (error) {
+        throw error;
+      }
+      
+      console.log('Task deleted successfully:', data);
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
+  }
+  
+
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.set('view engine','ejs');
 app.set('views','views');
+app.use(express.json());
 // Show list of todo in todo.ejs
 // directly render todo.ejs file
 app.get('/', (req, res) => {
+    console.log(getTodos())
     getTodos().then((data) => { 
         res.render('todo', {data: data})
     })
+    // res.render('add')
 }
 )
 
@@ -45,13 +68,22 @@ app.post('/add', (req, res) => {
 
 });
 // get /delete
-app.post('/delete', (req, res) => {
-    let id = req.body.id;
-    console.log(id);
-    // delete from database
-    supabase.from('todo').delete().match({ id: id }).then((data) => {
-        // redirect to todo page
+app.post('/delete', async (req, res) => {
+    try {
+        const { id } = req.body;
+        const { data, error } = await supabase
+          .from('todo')
+          .delete()
+          .eq('id', id);
+    
+        if (error) {
+          throw error;
+        }
+    
+        console.log(`Deleted task with ID ${id}`);
         res.redirect('/');
-    }
-    )
-})
+      } catch (err) {
+        console.error(`Error deleting task: ${err.message}`);
+        res.status(500).send(`Error deleting task: ${err.message}`);
+      }
+  });
