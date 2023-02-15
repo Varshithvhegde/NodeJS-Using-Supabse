@@ -1,18 +1,97 @@
+<style>
+ * {
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .header {
+            background-color: #f1f1f1;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 50px;
+        }
+
+        form {
+            margin: 20px auto;
+            max-width: 500px;
+            padding: 10px;
+        }
+
+        input[type=text] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .task-list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        .task-list li {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 5px;
+        }
+
+        #delete-btn {
+            background-color: #f44336;
+        }
+
+        #delete-btn:hover {
+            background-color: #da190b;
+        }
+
+        @media screen and (max-width: 600px) {
+            .task-list {
+                max-width: 100%;
+            }
+        }
+</style>
 <body>
-    <h1>TO-DO App</h1>
+    <header class="header"><h1>TO-DO App</h1></header>
     <form action="/add" method="POST">
         <input type="text" name="todo" placeholder="Enter your to-do">
         <button type="submit">Add</button>
     </form>
 
-    <ul>
-      <% for (let i = 0; i < data.length; i++) { %>
+    <ul class="task-list">
+      <% for(let i= data.length - 1; i >= 0; i--) { %>
         <li>
           <%= data[i].task_name %>
           <form action="/delete" method="POST">
             <input type="hidden" name="id" value="<%= data[i].id %>">
-            <button type="submit">Delete</button>
+            <button type="submit" id="delete-btn">Delete</button>
           </form>
         </li>
       <% } %>
